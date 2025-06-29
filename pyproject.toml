@@ -14,6 +14,7 @@ urllib3 = "^2.2.2"
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.2.6"
 pytest = "^8.3.2"
+pre-commit = "^4.2.0"
 
 [build-system]
 requires = ["poetry-core"]
