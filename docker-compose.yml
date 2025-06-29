@@ -4,12 +4,10 @@ services:
     # The official v2.0 Traefik docker image
     image: traefik:v2.0
     # Enables the web UI and tells Traefik to listen to docker
-    command: --api.insecure=true --providers.docker
+    command: --providers.docker
     ports:
-      # The HTTP port
       - "80:80"
-      # The Web UI (enabled by --api.insecure=true)
-      - "8080:8080"
+      - "443:443"
     volumes:
       # So that Traefik can listen to the Docker events
        - /var/run/docker.sock:/var/run/docker.sock
@@ -41,7 +39,9 @@ services:
     container_name: grafana
     image: grafana/grafana:12.0.2
     labels:
+      - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`dash.example.com`)"
+      - "traefik.http.routers.whoami.entrypoints=websecure"
     depends_on:
       - "victoriametrics"
     userns_mode: "keep-id;uid=472,gid=472"
