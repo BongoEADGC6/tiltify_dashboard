@@ -14,6 +14,8 @@ services:
     volumes:
       # So that Traefik can listen to the Docker events
        - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - vm_net
   victoriametrics:
     container_name: victoriametrics
     image: victoriametrics/victoria-metrics:v1.120.0
@@ -42,9 +44,10 @@ services:
     container_name: grafana
     image: grafana/grafana:12.0.2
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`${DASHBOARD_HOST}`)"
-      - "traefik.http.routers.whoami.entrypoints=websecure"
+      traefik.enable: true
+      traefik.http.routers.traefik.rule: Host(`${DASHBOARD_HOST}`)
+      traefik.http.routers.traefik.entrypoints: websecure
+      traefik.http.routers.traefik.tls: true
     depends_on:
       - "victoriametrics"
     userns_mode: "keep-id;uid=472,gid=472"
