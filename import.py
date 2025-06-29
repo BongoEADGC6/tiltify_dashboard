@@ -1,4 +1,5 @@
 """Used to import Tiltify donation exports and store in a VictoriaMetrics Database"""
+
 import argparse
 import logging
 import os
@@ -20,6 +21,7 @@ http = urllib3.PoolManager()
 logger = logging.getLogger()
 log_level = os.getenv("LOG_LEVEL", "INFO")
 logger.setLevel(log_level)
+
 
 def process_csv_vm(csvfile) -> list:
     data = pd.read_csv(csvfile)
