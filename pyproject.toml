@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "esa-tiltify-analytics"
+version = "0.1.0"
+description = "Parses Donation data to store in a VictoriaMetrics DB"
+authors = ["Cliff Hults <cliff.hults@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.2"
+urllib3 = "^2.2.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.2.6"
+pytest = "^8.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
