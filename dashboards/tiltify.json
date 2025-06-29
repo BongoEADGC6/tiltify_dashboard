@@ -37,7 +37,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -49,8 +49,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -80,12 +79,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -106,7 +105,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -118,8 +117,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -170,12 +168,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -196,7 +194,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -210,6 +208,7 @@
             "axisLabel": "",
             "axisPlacement": "right",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "bars",
             "fillOpacity": 100,
             "gradientMode": "hue",
@@ -243,8 +242,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -291,15 +289,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -317,7 +317,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -339,7 +339,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -351,8 +351,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -398,12 +397,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -424,7 +423,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -436,8 +435,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -487,12 +485,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -513,7 +511,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -525,8 +523,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -558,6 +555,12 @@
       "id": 10,
       "options": {
         "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
         "maxVizHeight": 300,
         "minVizHeight": 16,
         "minVizWidth": 8,
@@ -574,12 +577,12 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -596,7 +599,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -613,7 +616,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -647,7 +650,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -661,6 +664,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "hue",
@@ -694,8 +698,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -802,15 +805,17 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -828,7 +833,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -845,7 +850,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -866,7 +871,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -878,8 +883,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           }
@@ -925,12 +929,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "builder",
@@ -951,7 +955,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -963,167 +967,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "currencyUSD"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Dontaion Count"
-            },
-            "properties": []
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Donation Total"
-            },
-            "properties": []
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 18,
-        "y": 29
-      },
-      "id": 16,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.1.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\", target=\"\"}[7d]))",
-          "fullMetaSearch": false,
-          "hide": false,
-          "includeNullMetadata": true,
-          "instant": false,
-          "legendFormat": "Donation Total",
-          "range": true,
-          "refId": "B",
-          "useBackend": false
-        }
-      ],
-      "title": "Total Amount without Incentives applied",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "currencyUSD"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 34
-      },
-      "id": 15,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.1.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "max by(event) (increase(donation_total{event=~\"$event\"}[$__range]))",
-          "fullMetaSearch": false,
-          "hide": false,
-          "includeNullMetadata": true,
-          "instant": false,
-          "legendFormat": "Donation Total",
-          "range": true,
-          "refId": "B",
-          "useBackend": false
-        }
-      ],
-      "title": "Total Amount Raised",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1153,7 +997,7 @@
         "h": 5,
         "w": 6,
         "x": 18,
-        "y": 35
+        "y": 29
       },
       "id": 18,
       "options": {
@@ -1173,12 +1017,12 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -1197,6 +1041,163 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "currencyUSD"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 12,
+        "y": 34
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "max by(event) (increase(donation_total{event=~\"$event\"}[$__range]))",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "Donation Total",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
+        }
+      ],
+      "title": "Total Amount Raised",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${Datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "currencyUSD"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Dontaion Count"
+            },
+            "properties": []
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Donation Total"
+            },
+            "properties": []
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 18,
+        "y": 34
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.0.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${Datasource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\", target=\"\"}[7d]))",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "Donation Total",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
+        }
+      ],
+      "title": "Total Amount without Incentives applied",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
@@ -1212,7 +1213,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1224,8 +1225,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1257,6 +1257,12 @@
       "id": 19,
       "options": {
         "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
         "maxVizHeight": 300,
         "minVizHeight": 16,
         "minVizWidth": 8,
@@ -1273,12 +1279,12 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -1295,7 +1301,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -1312,7 +1318,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -1333,7 +1339,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1345,8 +1351,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1363,6 +1368,12 @@
       "id": 11,
       "options": {
         "displayMode": "lcd",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
         "maxVizHeight": 300,
         "minVizHeight": 16,
         "minVizWidth": 8,
@@ -1379,12 +1390,12 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -1418,7 +1429,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "ddskbmg4t86iof"
+        "uid": "${Datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1430,8 +1441,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -1463,6 +1473,12 @@
       "id": 9,
       "options": {
         "displayMode": "lcd",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
         "maxVizHeight": 300,
         "minVizHeight": 16,
         "minVizWidth": 8,
@@ -1479,12 +1495,12 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.1.0",
+      "pluginVersion": "12.0.2",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "ddskbmg4t86iof"
+            "uid": "${Datasource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -1529,6 +1545,7 @@
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
+                "barWidthFactor": 0.6,
                 "drawStyle": "line",
                 "fillOpacity": 0,
                 "gradientMode": "none",
@@ -1559,8 +1576,7 @@
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -1575,7 +1591,7 @@
             "h": 18,
             "w": 12,
             "x": 0,
-            "y": 24
+            "y": 61
           },
           "id": 8,
           "options": {
@@ -1590,10 +1606,12 @@
               "showLegend": true
             },
             "tooltip": {
+              "hideZeros": false,
               "mode": "single",
               "sort": "none"
             }
           },
+          "pluginVersion": "12.0.2",
           "targets": [
             {
               "datasource": {
@@ -1638,25 +1656,35 @@
       "type": "row"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "ESA Summer 2024",
-          "value": "ESA Summer 2024"
+          "text": "Victoriametrics",
+          "value": "deqc6qqx7u51ce"
+        },
+        "name": "Datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "text": "ESA Marathon",
+          "value": "ESA Marathon"
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "ddskbmg4t86iof"
+          "uid": "deqc6qqx7u51ce"
         },
         "definition": "label_values(donation,event)",
-        "hide": 0,
         "includeAll": false,
-        "multi": false,
         "name": "event",
         "options": [],
         "query": {
@@ -1666,20 +1694,17 @@
         },
         "refresh": 2,
         "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "2024-07-23T03:00:00.000Z",
-    "to": "2024-07-24T03:00:00.000Z"
+    "from": "now-2d",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "Europe/Stockholm",
-  "title": "ESA Tiltify Analytics",
+  "title": "Tiltify Analytics",
   "uid": "bdskk1o6qwk5cd",
-  "version": 15,
-  "weekStart": ""
+  "version": 5
 }
