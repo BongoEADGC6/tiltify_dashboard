@@ -43,7 +43,7 @@ services:
     image: grafana/grafana:12.0.2
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.whoami.rule=Host(`dash.example.com`)"
+      - "traefik.http.routers.whoami.rule=Host(`${DASHBOARD_HOST}`)"
       - "traefik.http.routers.whoami.entrypoints=websecure"
     depends_on:
       - "victoriametrics"
