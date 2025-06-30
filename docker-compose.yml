@@ -59,7 +59,7 @@ services:
       - 3000:3000
     volumes:
       - grafanadata:/var/lib/grafana
-      - ./provisioning/datasources/victoriametrics-datasource:/etc/grafana/provisioning/datasources:ro
+      - ./provisioning/datasources:/etc/grafana/provisioning/datasources:ro
       - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./dashboards:/var/lib/grafana/dashboards
     networks:
