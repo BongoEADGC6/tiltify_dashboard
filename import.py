@@ -135,11 +135,6 @@ def run():
     args = get_args()
     dono_files = args.filenames
     logging.info(f"Processing Files: {dono_files}")
-    print(f"About to import from {args.filenames}")
-    answer = input("Continue?")
-    if answer.lower() not in ["y", "yes"]:
-        print("exiting")
-        sys.exit()
     for file in dono_files:
         logging.info(f"Importing file: {file}")
         EVENT_NAME = os.getenv("EVENT_NAME", "")
@@ -157,6 +152,11 @@ def run():
                 event.delete_data()
         with open(file, "r", encoding="utf8") as csvfile:
             csv_data = process_csv_vm(csvfile)
+        print(f"About to import from {args.filenames}")
+        answer = input("Continue?")
+        if answer.lower() not in ["y", "yes"]:
+            print("exiting")
+            sys.exit()
         for index, row in csv_data.iterrows():
             logging.debug(index)
             metric_str = dono.process_entry(row, event.event_name)
