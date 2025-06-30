@@ -8,7 +8,6 @@ import sys
 import pandas as pd
 import urllib3
 
-EVENT_NAME = os.getenv("EVENT_NAME", "Donation Event")
 DB_HOSTNAME = os.getenv("DB_HOSTNAME", "localhost")
 
 FORMATTING = "1:metric:donation,2:time:unix_ms,3:label:reward,4:label:poll,5:label:target,6:label:event"
@@ -43,6 +42,7 @@ class Event:
         self.event_name = name
         self.donation_total = 0
         self.donation_count_total = 0
+        logging.info("Event Name: %s", self.event_name)
 
     def delete_data(self):
         r = http.request(
@@ -132,38 +132,42 @@ def get_args():
 
 def run():
     dono = TiltifyDonation()
-    event = Event(EVENT_NAME)
     args = get_args()
-    if args.clear:
-        print("Data will be cleared from database!!!!!")
-        answer = input("Continue?")
-        if answer.lower() not in ["y", "yes"]:
-            print("Skipping")
-        event.delete_data()
     dono_files = args.filenames
     logging.info(f"Processing Files: {dono_files}")
-    df_list = []
-    for file in dono_files:
-        logging.info(f"Importing file: {file}")
-        with open(file, "r", encoding="utf8") as csvfile:
-            df_list.append(process_csv_vm(csvfile))
-    csv_data = pd.concat(df_list)
-    print(f"About to import {len(csv_data)} entries from {args.filenames}")
+    print(f"About to import from {args.filenames}")
     answer = input("Continue?")
     if answer.lower() not in ["y", "yes"]:
         print("exiting")
         sys.exit()
-    for index, row in csv_data.iterrows():
-        logging.debug(index)
-        metric_str = dono.process_entry(row, event.event_name)
-        total_metric_str, count_metric_str = event.update_totals(row)
-        logging.debug("Uploading donation")
-        event.upload_data(metric_str, FORMATTING)
-        logging.debug("Uploading donation total")
-        event.upload_data(total_metric_str, FORMATTING_TOTAL)
-        event.upload_data(count_metric_str, FORMATTING_COUNT_TOTAL)
-    logging.info("Donation Total: %s", event.donation_total)
-    logging.info("Donation Count: %s", event.donation_count_total)
+    for file in dono_files:
+        logging.info(f"Importing file: {file}")
+        EVENT_NAME = os.getenv("EVENT_NAME", "")
+        if not EVENT_NAME:
+            EVENT_NAME = os.path.splitext(os.path.basename(file))[0]
+            EVENT_NAME = EVENT_NAME.split("tiltify-export-")[1]
+            EVENT_NAME = EVENT_NAME.split("-fact-donations")[0]
+        event = Event(EVENT_NAME)
+        if args.clear:
+            print("Data will be cleared from database!!!!!")
+            answer = input("Continue?")
+            if answer.lower() not in ["y", "yes"]:
+                print("Skipping")
+            else:
+                event.delete_data()
+        with open(file, "r", encoding="utf8") as csvfile:
+            csv_data = process_csv_vm(csvfile)
+        for index, row in csv_data.iterrows():
+            logging.debug(index)
+            metric_str = dono.process_entry(row, event.event_name)
+            total_metric_str, count_metric_str = event.update_totals(row)
+            logging.debug("Uploading donation")
+            event.upload_data(metric_str, FORMATTING)
+            logging.debug("Uploading donation total")
+            event.upload_data(total_metric_str, FORMATTING_TOTAL)
+            event.upload_data(count_metric_str, FORMATTING_COUNT_TOTAL)
+        logging.info("Donation Total: %s", event.donation_total)
+        logging.info("Donation Count: %s", event.donation_count_total)
 
 
 if __name__ == "__main__":

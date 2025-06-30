@@ -9,5 +9,10 @@ parser.add_argument("input_file", type=str, help="Path to the input CSV file.")
 
 args = parser.parse_args()
 
-f = pd.read_csv(args.input_file, usecols=[0, 1, 3, 4])
-f.to_csv(argparse.input_file, index=False)
+filtered_cols = [
+    "Donor Email",
+    "Donor Name",
+    "Donor Comment",
+]
+f = pd.read_csv(args.input_file, usecols=lambda x: x not in filtered_cols)
+f.to_csv(args.input_file, index=False)
