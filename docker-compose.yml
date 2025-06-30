@@ -8,12 +8,16 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entryPoints.websecure.address=:443"
+      - "--providers.file.directory=/etc/traefik/dynamic_conf"
+      - "--providers.file.watch=true"
     ports:
       - "80:80"
       - "443:443"
     volumes:
       # So that Traefik can listen to the Docker events
        - /var/run/docker.sock:/var/run/docker.sock
+       - ./certs:/certs:ro
+       - ./traefik.yaml:/etc/traefik/dynamic_conf/conf.yaml:ro
     networks:
       - vm_net
   victoriametrics:
@@ -55,7 +59,7 @@ services:
       - 3000:3000
     volumes:
       - grafanadata:/var/lib/grafana
-      - ./provisioning/datasources/prometheus-datasource:/etc/grafana/provisioning/datasources
+      - ./provisioning/datasources/victoriametrics-datasource:/etc/grafana/provisioning/datasources:ro
       - ./provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./dashboards:/var/lib/grafana/dashboards
     networks:
