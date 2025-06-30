@@ -1681,7 +1681,7 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "deqc6qqx7u51ce"
+          "uid": "${Datasource}"
         },
         "definition": "label_values(donation,event)",
         "includeAll": false,
