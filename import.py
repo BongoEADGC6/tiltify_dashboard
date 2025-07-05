@@ -160,7 +160,7 @@ def run():
 
         with open(file, "r", encoding="utf8") as csvfile:
             csv_data = process_csv_vm(csvfile)
-        print(f"About to import from {args.filenames}")
+        print(f"About to import {len(csv_data)} donations for {event_name}")
         answer = input("Continue?")
         if answer.lower() not in ["y", "yes"]:
             print("exiting")
