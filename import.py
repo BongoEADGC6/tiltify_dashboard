@@ -10,11 +10,18 @@ import urllib3
 
 DB_HOSTNAME = os.getenv("DB_HOSTNAME", "localhost")
 
+EVENT_NAME = os.getenv("EVENT_NAME", "")
+TEAM_NAME = os.getenv("TEAM_NAME", None)
+
 FORMATTING = "1:metric:donation,2:time:unix_ms,3:label:reward,4:label:poll,5:label:target,6:label:event"
 FORMATTING_TOTAL = "1:metric:donation_total,2:time:unix_ms,3:label:event"
 FORMATTING_COUNT_TOTAL = "1:metric:donation_count_total,2:time:unix_ms,3:label:event"
-delete_url = f"http://{DB_HOSTNAME}:8428/api/v1/admin/tsdb/delete_series"
-ingest_url = f"http://{DB_HOSTNAME}:8428/api/v1/import/csv?format="
+if TEAM_NAME:
+    FORMATTING += ",7:label:team"
+    FORMATTING_TOTAL += ",4:label:team"
+    FORMATTING_COUNT_TOTAL += ",4:label:team"
+DELETE_URL = f"http://{DB_HOSTNAME}:8428/api/v1/admin/tsdb/delete_series"
+INGEST_URL = f"http://{DB_HOSTNAME}:8428/api/v1/import/csv?format="
 http = urllib3.PoolManager()
 
 logger = logging.getLogger()
@@ -38,7 +45,7 @@ def parse_timestamp(timestamp) -> str:
 
 
 class Event:
-    def __init__(self, name):
+    def __init__(self, name=""):
         self.event_name = name
         self.donation_total = 0
         self.donation_count_total = 0
@@ -47,14 +54,14 @@ class Event:
     def delete_data(self):
         r = http.request(
             "POST",
-            delete_url,
+            DELETE_URL,
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             body="match[]=donation",
         )
         logging.debug("Response Code: %s", r.status)
         r = http.request(
             "POST",
-            delete_url,
+            DELETE_URL,
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             body="match[]=donation_total",
         )
@@ -62,7 +69,7 @@ class Event:
 
         r = http.request(
             "POST",
-            delete_url,
+            DELETE_URL,
             headers={"Content-Type": "application/x-www-form-urlencoded"},
             body="match[]=donation_count_total",
         )
@@ -71,7 +78,7 @@ class Event:
     def upload_data(self, metric_str, metric_format):
         r = http.request(
             "POST",
-            ingest_url + metric_format,
+            INGEST_URL + metric_format,
             headers={"Content-Type": "application/json"},
             body=metric_str,
         )
@@ -134,22 +141,22 @@ def run():
     dono = TiltifyDonation()
     args = get_args()
     dono_files = args.filenames
+    if args.clear:
+        print("Data will be cleared from database!!!!!")
+        answer = input("Continue?")
+        if answer.lower() not in ["y", "yes"]:
+            print("Skipping")
+        else:
+            Event().delete_data()
     logging.info(f"Processing Files: {dono_files}")
     for file in dono_files:
         logging.info(f"Importing file: {file}")
-        EVENT_NAME = os.getenv("EVENT_NAME", "")
         if not EVENT_NAME:
             EVENT_NAME = os.path.splitext(os.path.basename(file))[0]
             EVENT_NAME = EVENT_NAME.split("tiltify-export-")[1]
             EVENT_NAME = EVENT_NAME.split("-fact-donations")[0]
         event = Event(EVENT_NAME)
-        if args.clear:
-            print("Data will be cleared from database!!!!!")
-            answer = input("Continue?")
-            if answer.lower() not in ["y", "yes"]:
-                print("Skipping")
-            else:
-                event.delete_data()
+
         with open(file, "r", encoding="utf8") as csvfile:
             csv_data = process_csv_vm(csvfile)
         print(f"About to import from {args.filenames}")
@@ -161,6 +168,10 @@ def run():
             logging.debug(index)
             metric_str = dono.process_entry(row, event.event_name)
             total_metric_str, count_metric_str = event.update_totals(row)
+            if TEAM_NAME:
+                metric_str += f",{TEAM_NAME}"
+                total_metric_str += f",{TEAM_NAME}"
+                count_metric_str += f",{TEAM_NAME}"
             logging.debug("Uploading donation")
             event.upload_data(metric_str, FORMATTING)
             logging.debug("Uploading donation total")
