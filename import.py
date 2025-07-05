@@ -151,11 +151,12 @@ def run():
     logging.info(f"Processing Files: {dono_files}")
     for file in dono_files:
         logging.info(f"Importing file: {file}")
-        if not EVENT_NAME:
-            EVENT_NAME = os.path.splitext(os.path.basename(file))[0]
-            EVENT_NAME = EVENT_NAME.split("tiltify-export-")[1]
-            EVENT_NAME = EVENT_NAME.split("-fact-donations")[0]
-        event = Event(EVENT_NAME)
+        event_name = EVENT_NAME
+        if not event_name:
+            event_name = os.path.splitext(os.path.basename(file))[0]
+            event_name = event_name.split("tiltify-export-")[1]
+            event_name = event_name.split("-fact-donations")[0]
+        event = Event(event_name)
 
         with open(file, "r", encoding="utf8") as csvfile:
             csv_data = process_csv_vm(csvfile)
