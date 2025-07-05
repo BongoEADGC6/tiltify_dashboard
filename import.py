@@ -87,7 +87,7 @@ class Event:
     def update_totals(self, row):
         timestamp = row["Time of Donation"]
         timestamp_parsed = parse_timestamp(timestamp)
-        self.donation_total += float(row[1])
+        self.donation_total += float(row["Donation Amount"])
         self.donation_count_total += 1
         donation_total_clean = round(self.donation_total, 2)
         total_array = [str(donation_total_clean), timestamp_parsed, self.event_name]
