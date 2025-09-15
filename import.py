@@ -28,6 +28,14 @@ logger.setLevel(log_level)
 
 
 def process_csv_vm(csvfile) -> list:
+    """Process a CSV file containing Tiltify donation data.
+
+    Args:
+        csvfile: File object containing the CSV data to process
+
+    Returns:
+        list: Pandas DataFrame with processed donation data, sorted by timestamp
+    """
     data = pd.read_csv(csvfile)
     data["Time of Donation"] = pd.to_datetime(
         data["Time of Donation"], format="%Y-%m-%d %H:%M:%S.%fZ"
@@ -38,21 +46,54 @@ def process_csv_vm(csvfile) -> list:
 
 
 def parse_timestamp(timestamp) -> str:
+    """Convert a datetime timestamp to Unix milliseconds.
+
+    Args:
+        timestamp: datetime object to convert
+
+    Returns:
+        str: Unix timestamp in milliseconds as a string
+    """
     timestamp_unix_ms = timestamp.timestamp() * 1000
     return str(timestamp_unix_ms).split(".", maxsplit=1)[0]
 
 
 class TiltifyDonation:
+    """Class representing a single Tiltify donation."""
+
     def __init__(self):
+        """Initialize a new TiltifyDonation instance."""
         self.donation_data = 0
 
     def process_entry(self, row):
+        """Process a donation entry by converting its timestamp.
+
+        Args:
+            row: Dictionary containing donation data with timestamp
+
+        Returns:
+            dict: Processed donation data with Unix timestamp
+        """
         row["Time of Donation"] = parse_timestamp(row["Time of Donation"])
         return row
 
 
 class Team:
+    """Class representing a team that can have multiple campaigns.
+
+    Attributes:
+        team_name (str): Name of the team
+        donation_total (float): Running total of donations
+        donation_count_total (int): Count of total donations
+        campaigns (dict): Dictionary of Campaign objects
+    """
+
     def __init__(self, name=""):
+        """Initialize a new Team instance.
+
+        Args:
+            name (str, optional): Name of the team. Defaults to empty string.
+        """
         self.team_name = name
         self.donation_total = 0
         self.donation_count_total = 0
@@ -84,6 +125,14 @@ class Team:
         logging.debug("Response Code: %s", r.status)
 
     def add_campaign(self, campaign_name):
+        """Add a new campaign to the team if it doesn't exist.
+
+        Args:
+            campaign_name (str): Name of the campaign to add
+
+        Returns:
+            Campaign: The new or existing campaign object
+        """
         if campaign_name not in self.campaigns:
             self.campaigns[campaign_name] = Campaign(
                 name=campaign_name, team_name=self.team_name
@@ -95,7 +144,22 @@ class Team:
 
 
 class Campaign:
+    """Class representing a fundraising campaign.
+
+    Attributes:
+        campaign_name (str): Name of the campaign
+        team_name (str): Name of the team this campaign belongs to
+        donation_total (float): Total donations for this campaign
+        donation_count_total (int): Total number of donations
+    """
+
     def __init__(self, name, team_name):
+        """Initialize a new Campaign instance.
+
+        Args:
+            name (str): Name of the campaign
+            team_name (str): Name of the team this campaign belongs to
+        """
         self.campaign_name = name
         self.team_name = team_name
         self.donation_total = 0
@@ -127,6 +191,12 @@ class Campaign:
         logging.debug("Response Code: %s", r.status)
 
     def upload_data(self, metric_str, metric_format):
+        """Upload metric data to the VictoriaMetrics database.
+
+        Args:
+            metric_str (str): Comma-separated metric data string
+            metric_format (str): Format string for the metric data
+        """
         r = http.request(
             "POST",
             INGEST_URL + metric_format,
@@ -136,6 +206,11 @@ class Campaign:
         logging.debug("Response Code: %s", r.status)
 
     def add_donation(self, row):
+        """Add a new donation to the campaign and update totals.
+
+        Args:
+            row: DataFrame row containing the donation data
+        """
         dono = TiltifyDonation()
         dono_data = dono.process_entry(row)
         self._upload_donation(dono_data)
@@ -208,6 +283,11 @@ class Campaign:
 
 
 def get_args():
+    """Parse and return command line arguments.
+
+    Returns:
+        argparse.Namespace: Parsed command line arguments
+    """
     parser = argparse.ArgumentParser(
         prog="ProgramName",
         description="What the program does",
@@ -221,6 +301,11 @@ def get_args():
 
 
 def run():
+    """Main function to process Tiltify donation files and upload to database.
+
+    Reads donation CSV files, processes them, and uploads the data to VictoriaMetrics.
+    Allows user confirmation before processing each file.
+    """
     args = get_args()
     dono_files = args.filenames
     team = Team(TEAM_NAME)
