@@ -88,7 +88,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "max by(event) (donation_total{event=~\"$event\"})",
+          "expr": "sum by(event) (donation{event=~\"$event\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -177,7 +177,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\", target=\"\"}[90d]))",
+          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\", target=\"\"}[$__range]))",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -303,7 +303,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "max by(event) (increase(donation_total{event=~\"$event\"}))",
+          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\"}[1d]))",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -321,7 +321,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "max by(event) (increase(donation_count_total{event=~\"$event\"}))",
+          "expr": "count by(event) (count_over_time(donation{event=~\"$event\"}[1d]))",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -406,7 +406,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "max by(event) (donation_count_total{event=~\"$event\"})",
+          "expr": "count by(event) (donation{event=~\"$event\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -494,7 +494,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum by(event) (count_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\", target=\"\"}[90d]))",
+          "expr": "sum by(event) (count_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\", target=\"\"}[$__range]))",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -819,13 +819,13 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "max by(event) (irate(donation_count_total{event=~\"$event\"}))",
+          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\"}[1h]))",
           "fullMetaSearch": false,
           "hide": true,
           "includeNullMetadata": true,
           "instant": false,
           "interval": "",
-          "legendFormat": "Dontaion Rate",
+          "legendFormat": "Donation Rate",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -837,7 +837,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "max by(event) (donation_count_total{event=~\"$event\"})",
+          "expr": "count by(event) (donation{event=~\"$event\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -854,7 +854,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "max by(event) (donation_total{event=~\"$event\"})",
+          "expr": "sum by(event) (donation{event=~\"$event\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -1094,7 +1094,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "max by(event) (increase(donation_total{event=~\"$event\"}[$__range]))",
+          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\"}[$__range]))",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -1616,11 +1616,11 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "ddskbmg4t86iof"
+                "uid": "${Datasource}"
               },
               "disableTextWrap": false,
               "editorMode": "code",
-              "expr": "predict_linear(donation_total{event=~\"$event\"}[1h],4*3600)",
+              "expr": "predict_linear(sum by(event) (donation{event=~\"$event\"})[1h],4*3600)",
               "fullMetaSearch": false,
               "hide": false,
               "includeNullMetadata": true,
@@ -1633,11 +1633,11 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "ddskbmg4t86iof"
+                "uid": "${Datasource}"
               },
               "disableTextWrap": false,
               "editorMode": "builder",
-              "expr": "donation_total{event=~\"$event\"}",
+              "expr": "sum by(event) (donation{event=~\"$event\"})",
               "fullMetaSearch": false,
               "hide": false,
               "includeNullMetadata": true,
@@ -1648,7 +1648,7 @@
               "useBackend": false
             }
           ],
-          "title": "Panel Title",
+          "title": "Donation Forecast",
           "type": "timeseries"
         }
       ],
