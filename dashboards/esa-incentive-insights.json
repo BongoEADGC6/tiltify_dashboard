@@ -1102,6 +1102,339 @@
           "refId": "B"
         }
       ]
+    },
+    {
+      "id": 40,
+      "type": "row",
+      "title": "Donation Trends Over Time",
+      "gridPos": {
+        "x": 0,
+        "y": 68,
+        "w": 24,
+        "h": 1
+      },
+      "collapsed": false
+    },
+    {
+      "id": 41,
+      "type": "timeseries",
+      "title": "Cumulative $ Raised per Event",
+      "description": "Running total of donations raised \u2014 shows overall growth across events",
+      "gridPos": {
+        "x": 0,
+        "y": 69,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "custom": {
+            "lineWidth": 2,
+            "fillOpacity": 5
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\"}[$__range]))",
+          "legendFormat": "{{event}}",
+          "refId": "A",
+          "instant": true
+        }
+      ]
+    },
+    {
+      "id": 42,
+      "type": "timeseries",
+      "title": "Daily Donation Count per Event",
+      "description": "Number of donations received per day \u2014 shows whether audience participation is growing",
+      "gridPos": {
+        "x": 12,
+        "y": 69,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0,
+          "custom": {
+            "lineWidth": 2,
+            "fillOpacity": 10
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum by(event) (count_over_time(donation{event=~\"$event\"}[1d]))",
+          "legendFormat": "{{event}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 43,
+      "type": "timeseries",
+      "title": "Daily $ Raised per Event",
+      "description": "Total donations per day \u2014 shows revenue peaks (e.g. big incentive moments, marathons starts/ends)",
+      "gridPos": {
+        "x": 0,
+        "y": 79,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "custom": {
+            "lineWidth": 2,
+            "fillOpacity": 10
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\"}[1d]))",
+          "legendFormat": "{{event}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 44,
+      "type": "timeseries",
+      "title": "Average Donation Size Over Time (Daily)",
+      "description": "Rolling daily average donation amount per event \u2014 are donors giving more or less over time?",
+      "gridPos": {
+        "x": 12,
+        "y": 79,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2,
+          "custom": {
+            "lineWidth": 2,
+            "fillOpacity": 5
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\"}[1d])) / sum by(event) (count_over_time(donation{event=~\"$event\"}[1d]))",
+          "legendFormat": "{{event}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 45,
+      "type": "barchart",
+      "title": "Total $ Raised per Event",
+      "description": "Side-by-side comparison of total funds raised per event across all time",
+      "gridPos": {
+        "x": 0,
+        "y": 89,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "orientation": "horizontal",
+        "xTickLabelMaxLength": 40,
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sort_desc(sum by(event) (sum_over_time(donation{event=~\"$event\"}[$__range])))",
+          "legendFormat": "{{event}}",
+          "refId": "A",
+          "instant": true
+        }
+      ]
+    },
+    {
+      "id": 46,
+      "type": "barchart",
+      "title": "Total Donation Count per Event",
+      "description": "Side-by-side comparison of number of donations per event \u2014 audience participation volume",
+      "gridPos": {
+        "x": 12,
+        "y": 89,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "orientation": "horizontal",
+        "xTickLabelMaxLength": 40,
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sort_desc(sum by(event) (count_over_time(donation{event=~\"$event\"}[$__range])))",
+          "legendFormat": "{{event}}",
+          "refId": "A",
+          "instant": true
+        }
+      ]
+    },
+    {
+      "id": 47,
+      "type": "heatmap",
+      "title": "Donation Amount Distribution Over Time",
+      "description": "Heatmap of donation sizes over time \u2014 reveals whether the mix of small/large donations is shifting",
+      "gridPos": {
+        "x": 0,
+        "y": 97,
+        "w": 24,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "calculate": true,
+        "yAxis": {
+          "unit": "currencyUSD",
+          "decimals": 0
+        },
+        "color": {
+          "scheme": "Oranges",
+          "mode": "scheme"
+        },
+        "tooltip": {
+          "show": true,
+          "yHistogram": true
+        },
+        "legend": {
+          "show": true
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum by(event) (donation{event=~\"$event\"})",
+          "legendFormat": "{{event}}",
+          "refId": "A"
+        }
+      ]
     }
   ]
 }
