@@ -11,7 +11,7 @@ import urllib3
 
 API_BASE = "https://v5api.tiltify.com"
 TOKEN_URL = f"{API_BASE}/oauth/token"
-VM_FORMAT = "1:metric:donation,2:time:unix_ms,3:label:reward,4:label:poll,5:label:target,6:label:event"
+VM_FORMAT = "1:metric:donation,2:time:unix_ms,3:label:reward,4:label:poll,5:label:target,6:label:event,7:label:donation_id"
 
 logger = logging.getLogger()
 log_level = os.getenv("LOG_LEVEL", "INFO")
@@ -135,6 +135,7 @@ def donation_to_vm_row(donation, poll_map, target_map, event_name):
     amount = donation.get("amount", {}).get("value", "0")
     completed_at = donation.get("completed_at", "")
     timestamp = parse_timestamp(completed_at) if completed_at else "0"
+    donation_id = donation.get("id", "")
 
     reward_qty = 0
     for claim in (donation.get("reward_claims") or []):
@@ -150,6 +151,7 @@ def donation_to_vm_row(donation, poll_map, target_map, event_name):
         sanitize(poll_name),
         sanitize(target_name),
         sanitize(event_name),
+        sanitize(donation_id),
     ])
 
 
