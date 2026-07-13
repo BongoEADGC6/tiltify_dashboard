@@ -36,17 +36,57 @@
         "current": {},
         "hide": 0,
         "refresh": 2
+      },
+      {
+        "name": "event_from",
+        "type": "textbox",
+        "label": "From (override)",
+        "description": "Optional: override start date (ISO format)",
+        "current": {
+          "value": ""
+        },
+        "hide": 0
+      },
+      {
+        "name": "event_to",
+        "type": "textbox",
+        "label": "To (override)",
+        "description": "Optional: override end date (ISO format)",
+        "current": {
+          "value": ""
+        },
+        "hide": 0
       }
     ]
   },
   "panels": [
+    {
+      "id": 99,
+      "type": "text",
+      "title": "Quick Navigation \u2014 Select an Event",
+      "description": "Click an event to load it with the correct date range pre-set",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 8
+      },
+      "options": {
+        "mode": "html",
+        "code": {
+          "showLineNumbers": false,
+          "language": "html"
+        },
+        "content": "<style>\ntable {width:100%;border-collapse:collapse;font-size:13px;}\nth {background:#1e2433;color:#8fa;padding:6px 10px;text-align:left;border-bottom:1px solid #333;}\ntd {padding:5px 10px;border-bottom:1px solid #2a2e3e;}\ntr:hover td {background:#1e2433;}\na:hover {color:#fff;text-decoration:underline;}\n</style>\n<table>\n<tr><th>Event / Stream</th><th>From</th><th>To</th></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=ESA+Winter+2024+Stream+1&from=2024-02-17T00:00:00.000Z&to=2024-02-25T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">ESA Winter 2024 Stream 1</a></td><td>2024-02-17</td><td>2024-02-25</td></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=ESA+Winter+2024+Stream+2&from=2024-02-17T00:00:00.000Z&to=2024-02-25T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">ESA Winter 2024 Stream 2</a></td><td>2024-02-17</td><td>2024-02-25</td></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=ESA+Summer+2024+Stream+1&from=2024-07-20T00:00:00.000Z&to=2024-07-28T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">ESA Summer 2024 Stream 1</a></td><td>2024-07-20</td><td>2024-07-28</td></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=ESA+Summer+2025+-+Stream+1&from=2025-06-27T00:00:00.000Z&to=2025-07-06T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">ESA Summer 2025 - Stream 1</a></td><td>2025-06-27</td><td>2025-07-06</td></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=ESA+Summer+2025+-+Stream+2&from=2025-06-29T00:00:00.000Z&to=2025-07-06T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">ESA Summer 2025 - Stream 2</a></td><td>2025-06-29</td><td>2025-07-06</td></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=ESA+for+Jingle+Jam+2025&from=2025-12-09T00:00:00.000Z&to=2025-12-15T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">ESA for Jingle Jam 2025</a></td><td>2025-12-09</td><td>2025-12-15</td></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=ESA+Winter+2026+-+Stream+1&from=2026-02-07T00:00:00.000Z&to=2026-02-15T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">ESA Winter 2026 - Stream 1</a></td><td>2026-02-07</td><td>2026-02-15</td></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=ESA+Winter+2026+-+Stream+2&from=2026-02-09T00:00:00.000Z&to=2026-02-15T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">ESA Winter 2026 - Stream 2</a></td><td>2026-02-09</td><td>2026-02-15</td></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=TwitchCon+Amsterdam+2022+Charity+Stage&from=2022-07-15T00:00:00.000Z&to=2022-07-17T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">TwitchCon Amsterdam 2022 Charity Stage</a></td><td>2022-07-15</td><td>2022-07-17</td></tr>\n<tr><td><a href=\"http://150.136.236.220:3000/d/esa-daily-performance/esa-daily-performance?var-event=ESA+Reruns+-+Save+the+Children+2020&from=2020-06-01T00:00:00.000Z&to=2020-06-06T23:59:59.000Z&timezone=utc\" target=\"_self\" style=\"color:#6bf;text-decoration:none;\">ESA Reruns - Save the Children 2020</a></td><td>2020-06-01</td><td>2020-06-06</td></tr>\n</table>"
+      }
+    },
     {
       "id": 1,
       "type": "row",
       "title": "Event Summary",
       "gridPos": {
         "x": 0,
-        "y": 0,
+        "y": 9,
         "w": 24,
         "h": 1
       },
@@ -58,7 +98,7 @@
       "title": "Total Raised",
       "gridPos": {
         "x": 0,
-        "y": 1,
+        "y": 10,
         "w": 4,
         "h": 4
       },
@@ -113,7 +153,7 @@
       "title": "Total Donations",
       "gridPos": {
         "x": 4,
-        "y": 1,
+        "y": 10,
         "w": 4,
         "h": 4
       },
@@ -167,7 +207,7 @@
       "title": "Average Donation",
       "gridPos": {
         "x": 8,
-        "y": 1,
+        "y": 10,
         "w": 4,
         "h": 4
       },
@@ -222,7 +262,7 @@
       "description": "Highest single-day total raised",
       "gridPos": {
         "x": 12,
-        "y": 1,
+        "y": 10,
         "w": 4,
         "h": 4
       },
@@ -276,7 +316,7 @@
       "description": "Highest single-day donation count",
       "gridPos": {
         "x": 16,
-        "y": 1,
+        "y": 10,
         "w": 4,
         "h": 4
       },
@@ -330,7 +370,7 @@
       "description": "% of donations tied to a poll or reward",
       "gridPos": {
         "x": 20,
-        "y": 1,
+        "y": 10,
         "w": 4,
         "h": 4
       },
@@ -394,7 +434,7 @@
       "title": "Daily Breakdown",
       "gridPos": {
         "x": 0,
-        "y": 5,
+        "y": 14,
         "w": 24,
         "h": 1
       },
@@ -407,7 +447,7 @@
       "description": "Total donation amount per calendar day",
       "gridPos": {
         "x": 0,
-        "y": 6,
+        "y": 15,
         "w": 12,
         "h": 9
       },
@@ -461,7 +501,7 @@
       "description": "Number of individual donations received per calendar day",
       "gridPos": {
         "x": 12,
-        "y": 6,
+        "y": 15,
         "w": 12,
         "h": 9
       },
@@ -514,7 +554,7 @@
       "description": "Average donation amount per day \u2014 are donors giving more or less as the event progresses?",
       "gridPos": {
         "x": 0,
-        "y": 15,
+        "y": 24,
         "w": 12,
         "h": 9
       },
@@ -565,7 +605,7 @@
       "description": "Running total over the event \u2014 shows momentum and pacing",
       "gridPos": {
         "x": 12,
-        "y": 15,
+        "y": 24,
         "w": 12,
         "h": 9
       },
@@ -615,7 +655,7 @@
       "title": "Daily Incentive Activity",
       "gridPos": {
         "x": 0,
-        "y": 24,
+        "y": 33,
         "w": 24,
         "h": 1
       },
@@ -628,7 +668,7 @@
       "description": "How much of each day's revenue came from poll/reward incentives vs unattributed donations",
       "gridPos": {
         "x": 0,
-        "y": 25,
+        "y": 34,
         "w": 24,
         "h": 9
       },
@@ -696,7 +736,7 @@
       "description": "Which game/run incentive polls raised the most across the whole event",
       "gridPos": {
         "x": 0,
-        "y": 34,
+        "y": 43,
         "w": 12,
         "h": 10
       },
@@ -738,7 +778,7 @@
       "description": "Which polls attracted the most individual donations",
       "gridPos": {
         "x": 12,
-        "y": 34,
+        "y": 43,
         "w": 12,
         "h": 10
       },
@@ -779,7 +819,7 @@
       "title": "Hourly Detail",
       "gridPos": {
         "x": 0,
-        "y": 44,
+        "y": 53,
         "w": 24,
         "h": 1
       },
@@ -792,7 +832,7 @@
       "description": "Finer-grained view \u2014 useful for spotting donation spikes during specific runs or incentive moments",
       "gridPos": {
         "x": 0,
-        "y": 45,
+        "y": 54,
         "w": 24,
         "h": 9
       },
@@ -851,7 +891,7 @@
       "description": "Full poll breakdown: total raised, donation count, and average donation size for this event",
       "gridPos": {
         "x": 0,
-        "y": 54,
+        "y": 63,
         "w": 24,
         "h": 10
       },
