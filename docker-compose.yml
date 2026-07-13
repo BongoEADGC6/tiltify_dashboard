@@ -1,8 +1,5 @@
 ---
 services:
-  #  Metrics collector.
-  #  It scrapes targets defined in --promscrape.config
-  #  And forward them to --remoteWrite.url
   victoriametrics:
     container_name: victoriametrics
     image: victoriametrics/victoria-metrics:v1.120.0
