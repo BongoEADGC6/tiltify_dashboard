@@ -126,10 +126,9 @@ def sanitize(value):
     return value.strip()
 
 
-def parse_timestamp(iso_string):
+def format_timestamp(iso_string):
     dt = datetime.fromisoformat(iso_string.replace("Z", "+00:00"))
-    unix_ms = int(dt.timestamp() * 1000)
-    return str(unix_ms)
+    return dt.strftime("%Y-%m-%d %H:%M:%S.%fZ")
 
 
 def build_poll_map(polls):
@@ -143,7 +142,7 @@ def build_target_map(targets):
 def donation_to_csv_row(donation, poll_map, target_map, event_name):
     amount = donation.get("amount", {}).get("value", "0")
     completed_at = donation.get("completed_at", "")
-    timestamp = parse_timestamp(completed_at) if completed_at else "0"
+    timestamp = format_timestamp(completed_at) if completed_at else ""
 
     reward_qty = 0
     for claim in (donation.get("reward_claims") or []):
@@ -162,8 +161,8 @@ def donation_to_csv_row(donation, poll_map, target_map, event_name):
     ])
 
 
-def format_vm_header():
-    return "1:metric:donation,2:time:unix_ms,3:label:reward,4:label:poll,5:label:target,6:label:event"
+def format_csv_header():
+    return "Donation Amount,Time of Donation,Reward Quantity,Poll Name,Target Name,Event Name"
 
 
 def main():
@@ -223,7 +222,7 @@ def main():
 
     out_fh = open(args.output, "w", encoding="utf-8") if args.output else sys.stdout
 
-    print(format_vm_header(), file=out_fh)
+    print(format_csv_header(), file=out_fh)
 
     total_donations = 0
     for cid in campaign_ids:
