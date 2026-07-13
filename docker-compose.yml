@@ -18,7 +18,7 @@ services:
       - "--opentsdbListenAddr=:4242"
       - "--httpListenAddr=:8428"
       - "--influxListenAddr=:8089"
-      - "--retentionPeriod=1y"
+      - "--retentionPeriod=10y"
     networks:
       - vm_net
     restart: always
