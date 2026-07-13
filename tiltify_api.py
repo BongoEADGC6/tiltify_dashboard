@@ -1,6 +1,7 @@
 """Fetch donation data from Tiltify API and upload directly to VictoriaMetrics"""
 
 import argparse
+import hashlib
 import json
 import logging
 import os
@@ -11,7 +12,7 @@ import urllib3
 
 API_BASE = "https://v5api.tiltify.com"
 TOKEN_URL = f"{API_BASE}/oauth/token"
-VM_FORMAT = "1:metric:donation,2:time:unix_ms,3:label:reward,4:label:poll,5:label:target,6:label:event,7:label:donation_id"
+VM_FORMAT = "1:metric:donation,2:time:unix_ms,3:label:reward,4:label:poll,5:label:target,6:label:event"
 
 logger = logging.getLogger()
 log_level = os.getenv("LOG_LEVEL", "INFO")
@@ -118,9 +119,13 @@ def sanitize(value):
     return value.strip()
 
 
-def parse_timestamp(iso_string):
+def parse_timestamp(iso_string, donation_id=""):
     dt = datetime.fromisoformat(iso_string.replace("Z", "+00:00"))
-    return str(int(dt.timestamp() * 1000))
+    unix_ms = int(dt.timestamp() * 1000)
+    if donation_id:
+        offset = int(hashlib.md5(donation_id.encode()).hexdigest()[:6], 16) % 1000
+        unix_ms += offset
+    return str(unix_ms)
 
 
 def build_poll_map(polls):
@@ -134,8 +139,8 @@ def build_target_map(targets):
 def donation_to_vm_row(donation, poll_map, target_map, event_name):
     amount = donation.get("amount", {}).get("value", "0")
     completed_at = donation.get("completed_at", "")
-    timestamp = parse_timestamp(completed_at) if completed_at else "0"
     donation_id = donation.get("id", "")
+    timestamp = parse_timestamp(completed_at, donation_id) if completed_at else "0"
 
     reward_qty = 0
     for claim in (donation.get("reward_claims") or []):
@@ -151,7 +156,6 @@ def donation_to_vm_row(donation, poll_map, target_map, event_name):
         sanitize(poll_name),
         sanitize(target_name),
         sanitize(event_name),
-        sanitize(donation_id),
     ])
 
 
