@@ -3,12 +3,19 @@
   "uid": "esa-incentive-insights",
   "title": "ESA Incentive Insights",
   "description": "Analysis of which games and incentives resonated most with audiences across ESA events",
-  "tags": ["esa", "tiltify", "incentives"],
+  "tags": [
+    "esa",
+    "tiltify",
+    "incentives"
+  ],
   "timezone": "browser",
   "schemaVersion": 39,
   "version": 1,
   "refresh": "",
-  "time": { "from": "now-2y", "to": "now" },
+  "time": {
+    "from": "now-2y",
+    "to": "now"
+  },
   "templating": {
     "list": [
       {
@@ -16,16 +23,24 @@
         "type": "datasource",
         "pluginId": "prometheus",
         "label": "Datasource",
-        "current": { "value": "eeqhqe8l43doge" },
+        "current": {
+          "value": "eeqhqe8l43doge"
+        },
         "hide": 0
       },
       {
         "name": "event",
         "type": "query",
         "label": "Event",
-        "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "eeqhqe8l43doge"
+        },
         "definition": "label_values(donation, event)",
-        "query": { "query": "label_values(donation, event)", "refId": "StandardVariableQuery" },
+        "query": {
+          "query": "label_values(donation, event)",
+          "refId": "StandardVariableQuery"
+        },
         "multi": true,
         "includeAll": true,
         "allValue": ".*",
@@ -39,8 +54,13 @@
     {
       "id": 1,
       "type": "row",
-      "title": "Overview — Incentive Engagement",
-      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 1 },
+      "title": "Overview \u2014 Incentive Engagement",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 1
+      },
       "collapsed": false
     },
     {
@@ -48,73 +68,358 @@
       "type": "stat",
       "title": "Total $ Raised",
       "description": "Sum of all donations across selected events",
-      "gridPos": { "x": 0, "y": 1, "w": 4, "h": 4 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "reduceOptions": { "calcs": ["sum"] }, "colorMode": "value", "graphMode": "none", "textMode": "auto", "orientation": "auto" },
-      "fieldConfig": { "defaults": { "unit": "currencyUSD", "decimals": 2, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] } } },
-      "targets": [{ "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" }, "expr": "sum(sum_over_time(donation{event=~\"$event\"}[$__range]))", "legendFormat": "Total", "refId": "A" }]
+      "gridPos": {
+        "x": 0,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto",
+        "orientation": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum(sum_over_time(donation{event=~\"$event\"}[$__range]))",
+          "legendFormat": "Total",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
     {
       "id": 3,
       "type": "stat",
       "title": "Total Donations",
       "description": "Count of all donation events",
-      "gridPos": { "x": 4, "y": 1, "w": 4, "h": 4 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "reduceOptions": { "calcs": ["sum"] }, "colorMode": "value", "graphMode": "none", "textMode": "auto" },
-      "fieldConfig": { "defaults": { "unit": "short", "decimals": 0, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "blue", "value": null }] } } },
-      "targets": [{ "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" }, "expr": "sum(count_over_time(donation{event=~\"$event\"}[$__range]))", "legendFormat": "Count", "refId": "A" }]
+      "gridPos": {
+        "x": 4,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum(count_over_time(donation{event=~\"$event\"}[$__range]))",
+          "legendFormat": "Count",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
     {
       "id": 4,
       "type": "stat",
       "title": "$ Raised via Incentives",
       "description": "Donations tied to a poll, reward, or target",
-      "gridPos": { "x": 8, "y": 1, "w": 4, "h": 4 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "reduceOptions": { "calcs": ["sum"] }, "colorMode": "value", "graphMode": "none", "textMode": "auto" },
-      "fieldConfig": { "defaults": { "unit": "currencyUSD", "decimals": 2, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "orange", "value": null }] } } },
-      "targets": [{ "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" }, "expr": "sum(sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])) + sum(sum_over_time(donation{event=~\"$event\", reward!=\"0\", poll=\"\"}[$__range]))", "legendFormat": "Incentivised", "refId": "A" }]
+      "gridPos": {
+        "x": 8,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum(sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])) + sum(sum_over_time(donation{event=~\"$event\", reward!=\"0\", poll=\"\"}[$__range]))",
+          "legendFormat": "Incentivised",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
     {
       "id": 5,
       "type": "stat",
       "title": "Incentive Engagement Rate",
       "description": "% of donations that were tied to an incentive",
-      "gridPos": { "x": 12, "y": 1, "w": 4, "h": 4 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "reduceOptions": { "calcs": ["mean"] }, "colorMode": "value", "graphMode": "none", "textMode": "auto" },
-      "fieldConfig": { "defaults": { "unit": "percentunit", "decimals": 1, "min": 0, "max": 1, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "red", "value": null }, { "color": "yellow", "value": 0.2 }, { "color": "green", "value": 0.4 }] } } },
-      "targets": [{ "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" }, "expr": "(sum(count_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])) + sum(count_over_time(donation{event=~\"$event\", reward!=\"0\", poll=\"\"}[$__range]))) / sum(count_over_time(donation{event=~\"$event\"}[$__range]))", "legendFormat": "Rate", "refId": "A" }]
+      "gridPos": {
+        "x": 12,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "decimals": 1,
+          "min": 0,
+          "max": 1,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.2
+              },
+              {
+                "color": "green",
+                "value": 0.4
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "(sum(count_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])) + sum(count_over_time(donation{event=~\"$event\", reward!=\"0\", poll=\"\"}[$__range]))) / sum(count_over_time(donation{event=~\"$event\"}[$__range]))",
+          "legendFormat": "Rate",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
     {
       "id": 6,
       "type": "stat",
       "title": "Avg Donation (with Incentive)",
       "description": "Average donation amount when an incentive was chosen",
-      "gridPos": { "x": 16, "y": 1, "w": 4, "h": 4 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "reduceOptions": { "calcs": ["mean"] }, "colorMode": "value", "graphMode": "none", "textMode": "auto" },
-      "fieldConfig": { "defaults": { "unit": "currencyUSD", "decimals": 2, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "green", "value": null }] } } },
-      "targets": [{ "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" }, "expr": "sum(sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])) / sum(count_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range]))", "legendFormat": "Avg with incentive", "refId": "A" }]
+      "gridPos": {
+        "x": 16,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum(sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])) / sum(count_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range]))",
+          "legendFormat": "Avg with incentive",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
     {
       "id": 7,
       "type": "stat",
       "title": "Avg Donation (no Incentive)",
       "description": "Average donation when no incentive was chosen",
-      "gridPos": { "x": 20, "y": 1, "w": 4, "h": 4 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "reduceOptions": { "calcs": ["mean"] }, "colorMode": "value", "graphMode": "none", "textMode": "auto" },
-      "fieldConfig": { "defaults": { "unit": "currencyUSD", "decimals": 2, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "semi-dark-blue", "value": null }] } } },
-      "targets": [{ "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" }, "expr": "sum(sum_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\"}[$__range])) / sum(count_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\"}[$__range]))", "legendFormat": "Avg no incentive", "refId": "A" }]
+      "gridPos": {
+        "x": 20,
+        "y": 1,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "value",
+        "graphMode": "none",
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-blue",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum(sum_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\"}[$__range])) / sum(count_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\"}[$__range]))",
+          "legendFormat": "Avg no incentive",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
-
     {
       "id": 10,
       "type": "row",
-      "title": "Polls — Game & Run Incentives",
-      "gridPos": { "x": 0, "y": 5, "w": 24, "h": 1 },
+      "title": "Polls \u2014 Game & Run Incentives",
+      "gridPos": {
+        "x": 0,
+        "y": 5,
+        "w": 24,
+        "h": 1
+      },
       "collapsed": false
     },
     {
@@ -122,70 +427,180 @@
       "type": "barchart",
       "title": "Top Polls by $ Raised",
       "description": "Which game incentive/choice polls raised the most money across selected events",
-      "gridPos": { "x": 0, "y": 6, "w": 12, "h": 10 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+      "gridPos": {
+        "x": 0,
+        "y": 6,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
       "options": {
         "orientation": "horizontal",
         "xTickLabelRotation": 0,
         "xTickLabelMaxLength": 40,
         "groupWidth": 0.7,
         "barWidth": 0.97,
-        "legend": { "displayMode": "list", "placement": "bottom" }
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
       },
       "fieldConfig": {
-        "defaults": { "unit": "currencyUSD", "decimals": 2 },
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2
+        },
         "overrides": []
       },
-      "targets": [{
-        "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-        "expr": "sort_desc(sum by(poll) (sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])))",
-        "legendFormat": "{{poll}}",
-        "refId": "A",
-        "instant": true
-      }]
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sort_desc(sum by(poll) (sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])))",
+          "legendFormat": "{{poll}}",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
     {
       "id": 12,
       "type": "barchart",
       "title": "Top Polls by Donation Count",
       "description": "Which polls attracted the most individual donations",
-      "gridPos": { "x": 12, "y": 6, "w": 12, "h": 10 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+      "gridPos": {
+        "x": 12,
+        "y": 6,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
       "options": {
         "orientation": "horizontal",
         "xTickLabelRotation": 0,
         "xTickLabelMaxLength": 40,
         "groupWidth": 0.7,
         "barWidth": 0.97,
-        "legend": { "displayMode": "list", "placement": "bottom" }
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
       },
-      "fieldConfig": { "defaults": { "unit": "short", "decimals": 0 } },
-      "targets": [{
-        "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-        "expr": "sort_desc(sum by(poll) (count_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])))",
-        "legendFormat": "{{poll}}",
-        "refId": "A",
-        "instant": true
-      }]
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sort_desc(sum by(poll) (count_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])))",
+          "legendFormat": "{{poll}}",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
     {
       "id": 13,
       "type": "table",
       "title": "Poll Leaderboard",
       "description": "Full breakdown of all polls: total raised, donation count, average donation, and which events they appeared in",
-      "gridPos": { "x": 0, "y": 16, "w": 24, "h": 12 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "sortBy": [{ "desc": true, "displayName": "Total $" }], "footer": { "show": false } },
+      "gridPos": {
+        "x": 0,
+        "y": 16,
+        "w": 24,
+        "h": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Total $"
+          }
+        ],
+        "footer": {
+          "show": false
+        }
+      },
       "fieldConfig": {
-        "defaults": { "custom": { "align": "auto" } },
+        "defaults": {
+          "custom": {
+            "align": "auto"
+          }
+        },
         "overrides": [
-          { "matcher": { "id": "byName", "options": "Total $" }, "properties": [{ "id": "unit", "value": "currencyUSD" }, { "id": "decimals", "value": 2 }] },
-          { "matcher": { "id": "byName", "options": "Avg Donation" }, "properties": [{ "id": "unit", "value": "currencyUSD" }, { "id": "decimals", "value": 2 }] },
-          { "matcher": { "id": "byName", "options": "# Donations" }, "properties": [{ "id": "unit", "value": "short" }, { "id": "decimals", "value": 0 }] }
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total $"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "currencyUSD"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Avg Donation"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "currencyUSD"
+              },
+              {
+                "id": "decimals",
+                "value": 2
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "# Donations"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              },
+              {
+                "id": "decimals",
+                "value": 0
+              }
+            ]
+          }
         ]
       },
       "transformations": [
-        { "id": "merge", "options": {} },
+        {
+          "id": "merge",
+          "options": {}
+        },
         {
           "id": "organize",
           "options": {
@@ -200,7 +615,10 @@
       ],
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sort_desc(sum by(poll) (sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])))",
           "legendFormat": "{{poll}}",
           "refId": "A",
@@ -208,7 +626,10 @@
           "format": "table"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sort_desc(sum by(poll) (count_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])))",
           "legendFormat": "{{poll}}",
           "refId": "B",
@@ -216,7 +637,10 @@
           "format": "table"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sum by(poll) (sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])) / sum by(poll) (count_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range]))",
           "legendFormat": "{{poll}}",
           "refId": "C",
@@ -229,9 +653,17 @@
       "id": 14,
       "type": "barchart",
       "title": "Poll Performance by Event",
-      "description": "$ raised per poll broken down by event — shows which incentives drove more money at different events",
-      "gridPos": { "x": 0, "y": 28, "w": 24, "h": 10 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+      "description": "$ raised per poll broken down by event \u2014 shows which incentives drove more money at different events",
+      "gridPos": {
+        "x": 0,
+        "y": 28,
+        "w": 24,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
       "options": {
         "orientation": "horizontal",
         "xTickLabelRotation": 0,
@@ -239,72 +671,202 @@
         "groupWidth": 0.7,
         "barWidth": 0.97,
         "stacking": "normal",
-        "legend": { "displayMode": "list", "placement": "right" }
+        "legend": {
+          "displayMode": "list",
+          "placement": "right"
+        }
       },
-      "fieldConfig": { "defaults": { "unit": "currencyUSD", "decimals": 2 } },
-      "targets": [{
-        "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-        "expr": "sort_desc(sum by(poll, event) (sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])))",
-        "legendFormat": "{{event}} — {{poll}}",
-        "refId": "A",
-        "instant": true
-      }]
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sort_desc(sum by(poll, event) (sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])))",
+          "legendFormat": "{{event}} \u2014 {{poll}}",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
-
     {
       "id": 20,
       "type": "row",
       "title": "Rewards",
-      "gridPos": { "x": 0, "y": 38, "w": 24, "h": 1 },
+      "gridPos": {
+        "x": 0,
+        "y": 38,
+        "w": 24,
+        "h": 1
+      },
       "collapsed": false
     },
     {
       "id": 21,
       "type": "stat",
       "title": "$ Raised via Rewards",
-      "gridPos": { "x": 0, "y": 39, "w": 4, "h": 4 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "reduceOptions": { "calcs": ["sum"] }, "colorMode": "value", "graphMode": "none" },
-      "fieldConfig": { "defaults": { "unit": "currencyUSD", "decimals": 2, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "purple", "value": null }] } } },
-      "targets": [{ "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" }, "expr": "sum(sum_over_time(donation{event=~\"$event\", reward!=\"0\"}[$__range]))", "legendFormat": "Rewards $", "refId": "A" }]
+      "gridPos": {
+        "x": 0,
+        "y": 39,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "value",
+        "graphMode": "none"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum(sum_over_time(donation{event=~\"$event\", reward!=\"0\"}[$__range]))",
+          "legendFormat": "Rewards $",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
     {
       "id": 22,
       "type": "stat",
       "title": "Reward Donations",
-      "gridPos": { "x": 4, "y": 39, "w": 4, "h": 4 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "reduceOptions": { "calcs": ["sum"] }, "colorMode": "value", "graphMode": "none" },
-      "fieldConfig": { "defaults": { "unit": "short", "decimals": 0, "color": { "mode": "thresholds" }, "thresholds": { "mode": "absolute", "steps": [{ "color": "purple", "value": null }] } } },
-      "targets": [{ "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" }, "expr": "sum(count_over_time(donation{event=~\"$event\", reward!=\"0\"}[$__range]))", "legendFormat": "Count", "refId": "A" }]
+      "gridPos": {
+        "x": 4,
+        "y": 39,
+        "w": 4,
+        "h": 4
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "colorMode": "value",
+        "graphMode": "none"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0,
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          }
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sum(count_over_time(donation{event=~\"$event\", reward!=\"0\"}[$__range]))",
+          "legendFormat": "Count",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
     {
       "id": 23,
       "type": "barchart",
       "title": "Rewards $ Raised by Event",
       "description": "How much reward-linked donations contributed per event",
-      "gridPos": { "x": 8, "y": 39, "w": 16, "h": 8 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+      "gridPos": {
+        "x": 8,
+        "y": 39,
+        "w": 16,
+        "h": 8
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
       "options": {
         "orientation": "horizontal",
         "xTickLabelMaxLength": 40,
-        "legend": { "displayMode": "list", "placement": "bottom" }
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
       },
-      "fieldConfig": { "defaults": { "unit": "currencyUSD", "decimals": 2 } },
-      "targets": [{
-        "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-        "expr": "sort_desc(sum by(event) (sum_over_time(donation{event=~\"$event\", reward!=\"0\"}[$__range])))",
-        "legendFormat": "{{event}}",
-        "refId": "A",
-        "instant": true
-      }]
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
+          "expr": "sort_desc(sum by(event) (sum_over_time(donation{event=~\"$event\", reward!=\"0\"}[$__range])))",
+          "legendFormat": "{{event}}",
+          "refId": "A",
+          "instant": true
+        }
+      ]
     },
-
     {
       "id": 30,
       "type": "row",
       "title": "Cross-Event Incentive Comparison",
-      "gridPos": { "x": 0, "y": 47, "w": 24, "h": 1 },
+      "gridPos": {
+        "x": 0,
+        "y": 47,
+        "w": 24,
+        "h": 1
+      },
       "collapsed": false
     },
     {
@@ -312,34 +874,59 @@
       "type": "barchart",
       "title": "Incentive Type Mix by Event",
       "description": "How much each event raised via polls vs rewards vs no incentive",
-      "gridPos": { "x": 0, "y": 48, "w": 12, "h": 10 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+      "gridPos": {
+        "x": 0,
+        "y": 48,
+        "w": 12,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
       "options": {
         "orientation": "horizontal",
         "stacking": "normal",
         "xTickLabelMaxLength": 40,
-        "legend": { "displayMode": "list", "placement": "bottom" }
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
       },
-      "fieldConfig": { "defaults": { "unit": "currencyUSD", "decimals": 2 } },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2
+        }
+      },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sort_desc(sum by(event) (sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range])))",
-          "legendFormat": "Poll — {{event}}",
+          "legendFormat": "Poll \u2014 {{event}}",
           "refId": "A",
           "instant": true
         },
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sort_desc(sum by(event) (sum_over_time(donation{event=~\"$event\", reward!=\"0\", poll=\"\"}[$__range])))",
-          "legendFormat": "Reward — {{event}}",
+          "legendFormat": "Reward \u2014 {{event}}",
           "refId": "B",
           "instant": true
         },
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sort_desc(sum by(event) (sum_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\"}[$__range])))",
-          "legendFormat": "None — {{event}}",
+          "legendFormat": "None \u2014 {{event}}",
           "refId": "C",
           "instant": true
         }
@@ -350,25 +937,53 @@
       "type": "piechart",
       "title": "Overall Incentive Type Split ($)",
       "description": "Proportion of total $ raised via polls, rewards, or no incentive",
-      "gridPos": { "x": 12, "y": 48, "w": 6, "h": 10 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "pieType": "donut", "legend": { "displayMode": "list", "placement": "right" } },
-      "fieldConfig": { "defaults": { "unit": "currencyUSD", "decimals": 2 } },
+      "gridPos": {
+        "x": 12,
+        "y": 48,
+        "w": 6,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "pieType": "donut",
+        "legend": {
+          "displayMode": "list",
+          "placement": "right"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD",
+          "decimals": 2
+        }
+      },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sum(sum_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range]))",
           "legendFormat": "Polls",
           "refId": "A"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sum(sum_over_time(donation{event=~\"$event\", reward!=\"0\", poll=\"\"}[$__range]))",
           "legendFormat": "Rewards only",
           "refId": "B"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sum(sum_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\"}[$__range]))",
           "legendFormat": "No incentive",
           "refId": "C"
@@ -380,25 +995,53 @@
       "type": "piechart",
       "title": "Overall Incentive Type Split (count)",
       "description": "Proportion of donation count via polls, rewards, or no incentive",
-      "gridPos": { "x": 18, "y": 48, "w": 6, "h": 10 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
-      "options": { "pieType": "donut", "legend": { "displayMode": "list", "placement": "right" } },
-      "fieldConfig": { "defaults": { "unit": "short", "decimals": 0 } },
+      "gridPos": {
+        "x": 18,
+        "y": 48,
+        "w": 6,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
+      "options": {
+        "pieType": "donut",
+        "legend": {
+          "displayMode": "list",
+          "placement": "right"
+        }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "decimals": 0
+        }
+      },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sum(count_over_time(donation{event=~\"$event\", poll!=\"\"}[$__range]))",
           "legendFormat": "Polls",
           "refId": "A"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sum(count_over_time(donation{event=~\"$event\", reward!=\"0\", poll=\"\"}[$__range]))",
           "legendFormat": "Rewards only",
           "refId": "B"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sum(count_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\"}[$__range]))",
           "legendFormat": "No incentive",
           "refId": "C"
@@ -409,27 +1052,53 @@
       "id": 34,
       "type": "timeseries",
       "title": "Donation Flow Over Time (Incentivised vs Not)",
-      "description": "Hourly donation amounts — incentivised vs baseline — shows when incentives were live and driving donations",
-      "gridPos": { "x": 0, "y": 58, "w": 24, "h": 10 },
-      "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+      "description": "Hourly donation amounts \u2014 incentivised vs baseline \u2014 shows when incentives were live and driving donations",
+      "gridPos": {
+        "x": 0,
+        "y": 58,
+        "w": 24,
+        "h": 10
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "eeqhqe8l43doge"
+      },
       "options": {
-        "legend": { "displayMode": "list", "placement": "bottom" },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "fieldConfig": {
-        "defaults": { "unit": "currencyUSD", "custom": { "lineWidth": 2, "fillOpacity": 10 } }
+        "defaults": {
+          "unit": "currencyUSD",
+          "custom": {
+            "lineWidth": 2,
+            "fillOpacity": 10
+          }
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\", poll!=\"\"}[1h]))",
-          "legendFormat": "Poll — {{event}}",
+          "legendFormat": "Poll \u2014 {{event}}",
           "refId": "A"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "eeqhqe8l43doge" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "eeqhqe8l43doge"
+          },
           "expr": "sum by(event) (sum_over_time(donation{event=~\"$event\", poll=\"\", reward=\"0\"}[1h]))",
-          "legendFormat": "No incentive — {{event}}",
+          "legendFormat": "No incentive \u2014 {{event}}",
           "refId": "B"
         }
       ]
